@@ -1,5 +1,7 @@
 Code to translate standard guitar tuned tabs to notes
 
+not working yet
+
 To Use. Get your guitar tab from  https://tabs.ultimate-guitar.com
 This is the example here
 https://tabs.ultimate-guitar.com/tab/pink-floyd/wish-you-were-here-chords-44555
