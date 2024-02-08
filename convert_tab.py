@@ -1,5 +1,5 @@
-from fret_mapping import fret_mappings
-from strings_order import standard_tuning
+from fret_mapping import fret_mappings_standard, fret_mapping_open_d_tuning 
+from strings_order import standard_tuning, open_d_tuning
 
 def convert_tab_input(tab_input):
     # Split the input into lines
@@ -11,7 +11,7 @@ def convert_tab_input(tab_input):
     # Iterate through each line and convert fret numbers to note names
     for line_index, line in enumerate(lines):
         converted_line = ''
-        string = standard_tuning[line_index % len(standard_tuning)]  # Cycle through strings_order based on line_index
+        string = open_d_tuning[line_index % len(open_d_tuning)]  # Cycle through strings_order based on line_index
 
         i = 0
         while i < len(line):
@@ -23,7 +23,7 @@ def convert_tab_input(tab_input):
                     i += 1
                     fret += line[i]
                 
-                note = fret_mappings[string].get(fret, '?')
+                note = fret_mapping_open_d_tuning[string].get(fret, '?')
                 converted_line += note
             elif char in '-|':
                 converted_line += char
@@ -45,12 +45,12 @@ def convert_tab_input(tab_input):
 
 # Example usage
 tab_input_example = """
-e|-------------------3-3----------------3-3---------|
-B|-------------------3-3----------------3-3---------|
-G|-------------------0-0------0---------0-0---------|
-D|----------0--2-----2-2---2-----2--0---0-0---------| 
-A|-----0h2-----------2-2----------------2-2---------|
-E|--3----------------0-0----------------3-3---------|
+|-----5-7-5h7-5h7-5h7-:-5h7-5---5-7-5-3b3.5-0----:----------0h3-5-7-5h7-:
+|-5h8-----------------:-------8------------------:----------------------:
+|-5-------------------:--------------------------:-^2-------------------:
+|-0-------------------:--------------------------:-^0-----0-------------:
+|---------------------:--------------------------:-^0-------------------:
+|---------------------:--------------------------:-^x-------------------:
 """
 
 example_output = convert_tab_input(tab_input_example)

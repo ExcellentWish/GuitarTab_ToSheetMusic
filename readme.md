@@ -1,6 +1,13 @@
 Code to translate standard guitar tuned tabs to notes
 
-not working yet
+To select tuning change line 14
+string = open_d_tuning[line_index % len(open_d_tuning)]  # Cycle through strings_order based on line_index
+string = tandard_tuning[line_index % len(tandard_tuning)]  # Cycle through strings_order based on line_index
+
+and line 26
+note = fret_mapping_open_d_tuning[string].get(fret, '?')
+
+note = fret_mappings_standard[string].get(fret, '?')
 
 To Use. Get your guitar tab from  https://tabs.ultimate-guitar.com
 This is the example here
