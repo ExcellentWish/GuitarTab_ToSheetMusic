@@ -7,7 +7,7 @@ string = standard_tuning[line_index % len(standard_tuning)]  # Cycle through str
 or 
 string = dad_tuning[line_index % len(dad_tuning)]
 
-and change line 26
+and change line 33
 note = fret_mapping_open_d_tuning[string].get(fret, '?')
 
 note = fret_mappings_standard[string].get(fret, '?')
