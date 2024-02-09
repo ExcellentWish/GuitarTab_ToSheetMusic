@@ -1,4 +1,4 @@
-from fret_mapping import fret_mappings_standard, fret_mapping_open_d_tuning ,fret_mapping_dad_tuning
+from fret_mapping import fret_mappings_standard, fret_mapping_open_d_tuning ,fret_mapping_dad_tuning, valid_chars
 from strings_order import standard_tuning, open_d_tuning, dad_tuning
 
 def convert_tab_input(tab_input):
@@ -14,10 +14,17 @@ def convert_tab_input(tab_input):
         string = dad_tuning[line_index % len(dad_tuning)]  # Cycle through strings_order based on line_index
 
         i = 0
+        
+
+        # Loop through the line
         while i < len(line):
             char = line[i]
 
-            if char.isdigit():
+            # Check if the character is in the valid_chars dictionary
+            if char in valid_chars:
+                converted_line += char
+            elif char.isdigit():
+                # Handle digits
                 fret = char
                 while i + 1 < len(line) and line[i + 1].isdigit():
                     i += 1
@@ -25,32 +32,7 @@ def convert_tab_input(tab_input):
                 
                 note = fret_mapping_dad_tuning[string].get(fret, '?')
                 converted_line += note
-            elif char in '-|':
-                converted_line += char
-            elif char in 'x': # For muteted notes
-                converted_line += char    # For strum pattern
-            elif char in 's': # For slide notes
-                converted_line += char     
-            elif char in '^':
-                converted_line += char  
-            elif char in '(':
-                converted_line += char
-            elif char in ')':
-                converted_line += char
-            elif char in 'p':
-                converted_line += char               
-            elif char in ':':
-                converted_line += char  # For bend notes
-            elif char in 'b':
-                converted_line += char  # For pause notes
-            elif char in '.':
-                converted_line += char           
-            elif char == 'h':
-                converted_line += char
-                i += 1  # Skip the next character as it's part of the hammer-on notation
-                continue
             else:
-                # For other notations or errors, use a placeholder or the character itself
                 converted_line += '?'
 
             i += 1
@@ -62,7 +44,7 @@ def convert_tab_input(tab_input):
     return result
 
 # Example usage D A D G A D
-tab_input_example = """
+tab_input_example = r"""
 |---0---------0-------0-|-----0-----0-------0-------0-|
 |-----------------------|-----------------------0-----|
 |-2---------------2-----|---------------2-------------|
